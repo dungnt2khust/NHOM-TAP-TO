@@ -27,6 +27,8 @@ function render() {
     for (var i = 0; i < dropdownData.length; i++) {
         if (i != currVal) {
             dropdownListHTML += `<li data-id=${i} class="dropdown-item"> ${dropdownData[i]} </li>`;
+        } else {
+            dropdownListHTML += `<li data-id=${i} class="dropdown-item active"> ${dropdownData[i]} </li>`;
         }
     }
 

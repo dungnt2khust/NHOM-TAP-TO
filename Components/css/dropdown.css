@@ -48,10 +48,17 @@
     cursor: pointer;
 }
 
-.dropdown-item:hover {
+
+.dropdown-item.active {
     background-color: #019160;
     color: #fff;
 }
+
+.dropdown-item:hover {
+    background-color: #e1e1e1;
+    color: #000;
+}
+
 
 .icon-down {
     /* display: none; */
