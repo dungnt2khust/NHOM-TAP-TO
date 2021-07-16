@@ -1,6 +1,6 @@
 .wrapper {
     width: 500px;
-    height: 500px;
+    height: 250px;
     background-color: #ddd;
     margin: auto;
     display: flex;
@@ -49,6 +49,11 @@
 }
 
 .dropdown-item:hover {
+    background-color: #cacaca;
+    color: #000;
+}
+
+.dropdown-item.dropdown-item--active {
     background-color: #019160;
     color: #fff;
 }
@@ -93,4 +98,14 @@
     justify-content: space-between;
     align-items: center;
     padding-right: 10px;
+}
+
+.dropdown-item__icon {
+    font-size: 12px;
+    margin-right: 4px;
+    visibility: hidden;
+}
+
+.dropdown-item.dropdown-item--active .dropdown-item__icon {
+    visibility: visible;
 }
