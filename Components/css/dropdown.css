@@ -48,13 +48,8 @@
     cursor: pointer;
 }
 
-.dropdown-item:hover {
-    background-color: #cacaca;
-    color: #000;
-}
 
-
-.dropdown-item.active {
+.dropdown-item.dropdown-item--active {
     background-color: #019160;
     color: #fff;
 }
