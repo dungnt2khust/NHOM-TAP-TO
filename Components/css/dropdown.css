@@ -1,6 +1,6 @@
 .wrapper {
     width: 500px;
-    height: 500px;
+    height: 250px;
     background-color: #ddd;
     margin: auto;
     display: flex;
@@ -46,6 +46,11 @@
 .dropdown-item {
     padding: 10px 8px;
     cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #cacaca;
+    color: #000;
 }
 
 
@@ -100,4 +105,14 @@
     justify-content: space-between;
     align-items: center;
     padding-right: 10px;
+}
+
+.dropdown-item__icon {
+    font-size: 12px;
+    margin-right: 4px;
+    visibility: hidden;
+}
+
+.dropdown-item.dropdown-item--active .dropdown-item__icon {
+    visibility: visible;
 }
