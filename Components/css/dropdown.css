@@ -108,6 +108,7 @@
     visibility: hidden;
 }
 
+
 .dropdown-item.dropdown-item--active .dropdown-item__icon {
     visibility: visible;
 }
