@@ -1,97 +1,24 @@
 // BEGIN DECLARE VARIABLES
-var combobox = document.querySelector('.combobox');
-var comboboxDropdown = document.querySelector('.combobox__dropdown');
-var comboboxList = document.querySelector('.combobox__list');
-var comboboxIcon = document.querySelector('.combobox__icon');
-var comboboxInput = document.querySelector('.combobox__input');
-var comboboxInputCancel = document.querySelector('.combobox__input-cancel');
 
+// COMBOBOX POSITION
+var comboboxPosition = document.querySelector('.combobox--position');
+var comboboxDropdownPosition = document.querySelector('.combobox__dropdown--position');
+var comboboxListPosition = document.querySelector('.combobox__list--position');
+var comboboxInputPosition = document.querySelector('.combobox__input--position');
+
+
+
+// COMBOBOX RESTAURANT 
+var comboboxRestaurant = document.querySelector('.combobox--restaurant');
+var comboboxDropdownRestaurant = document.querySelector('.combobox__dropdown--restaurant');
+var comboboxListRestaurant = document.querySelector('.combobox__list--restaurant');
+var comboboxInputRestaurant = document.querySelector('.combobox__input--restaurant');
+
+// STATUS
 var statusComboboxList = false;
 
-// END DECLARE VARIABLES
-
-
-
-// BEGIN HANDLE EVENTS
-comboboxDropdown.addEventListener('click', function () {
-    if (statusComboboxList) {
-        comboboxList.style.display = "none";
-        statusComboboxList = false;
-        comboboxIcon.style.transform = "rotate(0)";
-        comboboxIcon.style.transition = "all 0.3s ease";
-        combobox.style.border = "2px solid #bbb";
-        comboboxDropdown.style.borderLeft = "2px solid #bbb";
-    } else {
-        comboboxList.style.display = "block";
-        statusComboboxList = true;
-        comboboxIcon.style.transform = "rotate(180deg)";
-        comboboxIcon.style.transition = "all 0.3s ease";
-        combobox.style.border = "2px solid #019160";
-        comboboxDropdown.style.borderLeft = "2px solid #019160";
-    }
-});
-
-comboboxList.addEventListener('click', function () {
-    if (statusComboboxList) {
-        comboboxList.style.display = "none";
-        statusComboboxList = false;
-        comboboxIcon.style.transform = "rotate(0)";
-        comboboxIcon.style.transition = "all 0.3s ease";
-        comboboxInputCancel.style.display = "none";
-        combobox.style.border = "2px solid #bbb";
-        comboboxDropdown.style.borderLeft = "2px solid #bbb";
-    } else {
-        comboboxList.style.display = "block";
-        statusComboboxList = true;
-        comboboxIcon.style.transform = "rotate(180deg)";
-        comboboxIcon.style.transition = "all 0.3s ease";
-        combobox.style.border = "2px solid #bbb";
-        comboboxDropdown.style.borderLeft = "2px solid #019160";
-    }
-});
-
-comboboxInput.addEventListener('focus', function () {
-    console.log('input focusing');
-    comboboxList.style.display = "block";
-    statusComboboxList = true;
-    comboboxIcon.style.transform = "rotate(180deg)";
-    comboboxIcon.style.transition = "all 0.3s ease";
-    comboboxInputCancel.style.display = "block";
-    combobox.style.border = "2px solid #019160";
-    comboboxDropdown.style.borderLeft = "2px solid #019160";
-});
-
-
-comboboxInput.addEventListener('input', function () {
-    renderInput();
-});
-
-comboboxInputCancel.addEventListener('click', function () {
-    comboboxInput.value = '';
-    comboboxInput.focus();
-    renderInput();
-});
-
-window.addEventListener('keydown', function (e) {
-    if (e.code == "Enter") {
-        comboboxList.style.display = "none";
-        statusComboboxList = false;
-        comboboxIcon.style.transform = "rotate(0)";
-        comboboxIcon.style.transition = "all 0.3s ease";
-        comboboxInputCancel.style.display = "none";
-        combobox.style.border = "2px solid #bbb";
-        comboboxDropdown.style.borderLeft = "2px solid #bbb";
-        comboboxInput.blur();
-        resolveInputValue();
-    }
-});
-// END HANDLE EVENTS
-
-
-
-
-// BEGIN MAIN PROGRAM
-var comboboxData = [
+// DATA
+var comboboxDataPosition = [
     "Tất cả vị trí",
     "Giám đốc",
     "Trưởng phòng",
@@ -99,18 +26,77 @@ var comboboxData = [
     "Intern HR"
 ];
 
+var comboboxDataRestaurant = [
+    'Nhà hàng Biển Đông',
+    'Nhà hàng Biển Tây',
+    'Nhà hàng Biển Nam',
+    'Nhà hàng Biển Bắc',
+    'Nhà hàng Biển Vũ Trụ'
+];
+
 var currentValue = 0;
-renderCombobox();
+
+
+// END DECLARE VARIABLES
+
+
+// BEGIN MAIN PROGRAM
+
+renderCustomCombobox(comboboxInputPosition, comboboxListPosition, comboboxDataPosition, comboboxPosition, comboboxDropdownPosition);
+
+renderCustomCombobox(comboboxInputRestaurant, comboboxListRestaurant, comboboxDataRestaurant, comboboxRestaurant, comboboxDropdownRestaurant);
 
 // END MAIN PROGRAM
 
 
 
-
-
-
 // BEGIN FUNCTIONS
-function renderCombobox() {
+
+function renderCustomCombobox(comboboxInput, comboboxList, comboboxData, combobox, comboboxDropdown) {
+    // RENDER COMBOBOX
+    renderCombobox(comboboxInput, comboboxList, comboboxData);
+
+    var comboboxInputCancelSub = combobox.querySelector('.combobox__input-cancel');
+
+
+    // BEGIN HANDLE EVENTS
+    comboboxList.addEventListener('click', function () {
+        combobox.classList.remove('show');
+    });
+
+    comboboxInput.addEventListener('focus', function () {
+        combobox.classList.remove('error');
+        combobox.classList.add('show');
+    });
+
+
+    comboboxInput.addEventListener('input', function () {
+        console.log('oninput');
+        renderInput(comboboxInput, comboboxList, comboboxData);
+    });
+
+    comboboxInputCancelSub.addEventListener('click', function () {
+        comboboxInput.value = '';
+        comboboxInput.focus();
+        renderInput(comboboxInput, comboboxList, comboboxData);
+    });
+
+    window.addEventListener('keydown', function (e) {
+        if (e.code == "Enter") {
+            displayDropdown(comboboxList, combobox, comboboxDropdown);
+            comboboxInput.blur();
+            resolveInputValue(comboboxInput, comboboxData, combobox, comboboxDropdown);
+        }
+    });
+
+    comboboxDropdown.addEventListener('click', function () {
+        displayDropdown(comboboxList, combobox, comboboxDropdown);
+    });
+
+    // FINISH HANDLE EVENTS
+}
+
+function renderCombobox(comboboxInput, comboboxList, comboboxData) {
     var comboboxListHTML = '';
     for (var i = 0; i < comboboxData.length; i++) {
         if (i == currentValue) {
@@ -118,7 +104,6 @@ function renderCombobox() {
         } else {
             comboboxListHTML += `<li data-id=${i} class="combobox__item"><i class="fas fa-check combobox__check"></i> ${comboboxData[i]}</li>`;
         }
-
     }
     comboboxInput.value = comboboxData[currentValue];
     comboboxList.innerHTML = comboboxListHTML;
@@ -128,13 +113,13 @@ function renderCombobox() {
     comboboxItems.forEach(function (comboboxItem) {
         comboboxItem.addEventListener('click', function () {
             currentValue = comboboxItem.getAttribute('data-id');
-            renderCombobox();
+            renderCombobox(comboboxInput, comboboxList, comboboxData);
         });
     });
 }
 
 // RENDER BY SEARCHING TEXT
-function renderInput() {
+function renderInput(comboboxInput, comboboxList, comboboxData) {
     var comboboxListHTML = '';
     var inputValue = comboboxInput.value;
     var inputValueLowercase = inputValue.toLowerCase().trim();
@@ -155,25 +140,28 @@ function renderInput() {
 
     comboboxItems.forEach(function (comboboxItem) {
         comboboxItem.addEventListener('click', function () {
-            console.log(comboboxItem)
             currentValue = comboboxItem.getAttribute('data-id');
-            console.log(currentValue);
-            renderCombobox();
+            renderCombobox(comboboxInput, comboboxList, comboboxData);
         });
     });
 }
 
 // RESOLVE INPUT VALUE
-function resolveInputValue() {
+function resolveInputValue(comboboxInput, comboboxData, combobox, comboboxDropdown) {
     var inputValue = comboboxInput.value;
     var check = comboboxData.find(function (data) {
         return data == inputValue;
     });
 
     if (check == undefined) {
-        combobox.style.border = "2px solid rgb(255, 73, 73)";
-        comboboxDropdown.style.borderLeft = "2px solid rgb(255, 73, 73)";
+        combobox.classList.add('error');
     }
 }
 
+
+// SHOW DROPDOWN
+function displayDropdown(comboboxList, combobox, comboboxDropdown) {
+    combobox.classList.remove('error');
+    combobox.classList.toggle('show');
+}
 // END FUNCTIONS
