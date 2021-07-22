@@ -35,7 +35,7 @@
         font-size: 13px;
         border-radius: 4px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-        animation: toastMessageFadeIn 0.8s ease;
+        animation: toastMessageFadeIn 0.5s ease;
         width: fit-content;
     }
     .toast-message.toast-message--success {
