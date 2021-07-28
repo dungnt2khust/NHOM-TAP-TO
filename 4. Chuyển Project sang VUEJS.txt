@@ -1,0 +1,76 @@
+CHUYỂN PROJECT SANG VUEJS
+
+1. Tạo Project VUEJS
+- Cài CLI (Command line interface)
+	npm install -g @vue/cli
+- Tạo mới Project VUEJS
+	vue create [my_project] -d
+	(không chứa kí tự in hoa)
+- cd my_project:
+	+ Nếu là file package.json => npm run serve
+	+ Nếu là file yarn.json => yarn serve
+- Tạo base cho khung thư mục
+	+ css: base, layout
+	+ components: base, layout
+	+ view: employee, customer
+- Nhúng font-awesome online bằng cách cho vào public/index.html
+
+2. Chuyển Project sang VUEJS (html, css)
+
+- Chuyển tài nguyên vào trong assets: font, icon, img
+
+- Chuyển css
+
+- js thì không chuyển vì dùng hoàn toàn vue rồi nên không cần 
+(có thể tham khảo logic để chuyển sang vue cho nhanh cũng được)
+
+- các component tạo sẵn mang tạm sang để chuyển về vue sau
+
+- phân tích giao diện từ lớn đến nhỏ dần để tạo từng component một
+
+- import từng file css và tạo từng component để fix lỗi từng phần một 
+(chủ yếu là đường dẫn, một vài css)
+	+ Thêm html vào component
+	+ Đặt tên ở phần name trong phần export
+		. có thể dùng tên khi import 
+		. hoặc tên được export
+	+ import ở phía component cha và khai báo components cho nó
+	+ đặt thẻ component con vào template của component cha
+
+3. lấy dữ liệu đổ vào table bằng thư viện AXIOS
+
+- Cài AXIOS : 
+	npm install --save axios vue-axios
+	(Cài trên thư mục được chọn)
+- import thư viện vào để sử dụng (trong thẻ script)
+	import axios from 'axios'
+	import VueAxios from 'vue-axios'
+	(Sử dụng một trong hai)
+- Cách dùng:
+	$.ajax({
+	   url: 'hasfhslf',
+	   method: 'GET'
+	}).done.fail
+	axios.get('APIurl')
+		.then(function(res) { //done})
+		.catch(function(res) { //fail});
+- Đổ vào bảng bằng v-for: (cần có key - warning)
+	+ v-bind:key="" => shorthand :key=""
+	+ in ra biến bằng cách sử dụng {{}}
+	+ cấu hình emmet trong vue html (trong file setting.json => "vue-html": "html", "vue": "html")
+
+4. Bắt sự kiện click vào row của table hiển form và đổ dữ liệu
+	+ demo sự kiện click
+		. dùng v-on:click="function()"
+		. shorthand: @click="function()" hoặc @[event]="function()"
+	+ click vào từng dòng:
+		. có thể dùng JQUERY để sử dụng hàm hide() và show()
+		. dùng v-bind:class="{}"
+			! sự kiện click thì method/computed sẽ trả về 
+			true cho class show
+		. dùng condition rendering: v-if:
+			! đặt một biến hiển thị hoặc không hiển thị popup 
+			! hàm click sẽ đổi giá trị boolean đó và v-if sẽ bắt sự kiện
+			(demo)
+		. bắt sự kiện click e.target để lấy attribute key của row
+		sau đó đổ dữ liệu lên
