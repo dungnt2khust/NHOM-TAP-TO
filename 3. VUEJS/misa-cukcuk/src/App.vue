@@ -17,6 +17,7 @@
 import TheMain from './components/layout/TheMain.vue'
 import ThePopupInfo from './components/layout/ThePopupInfo.vue'
 import axios from 'axios'
+import {EventBus} from './main'
 
 export default {
   name: 'App',
@@ -34,6 +35,9 @@ export default {
     },
     popupCancelClick() {
       this.popupShow = false;
+    },
+    itemClick(data) {
+      console.log('app', data);
     }
   },
   created() {
@@ -42,6 +46,9 @@ export default {
           vm.employees = res.data;
       }).catch(res => {
           console.log(res.data);
+      });
+      EventBus.$on('itemClick', (data) => {
+        console.log(data);
       });
   },
   components: {

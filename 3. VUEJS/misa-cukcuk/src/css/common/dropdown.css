@@ -10,6 +10,10 @@
     user-select: none;
     cursor: pointer;
 }
+.dropdown.dropdown--restaurant {
+    width: 250px;
+    margin: 0 20px ;
+}
 /* FOCUS DROPDOWN */
 .focus-dropdown {
     border: 1px solid #019160 !important;

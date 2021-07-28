@@ -2,14 +2,13 @@
 @import url('base/resetcss.css');
 @import url('base/variable.css');
 @import url("base/customizeScrollbar.css");
+@import url("./common/dropdown.css");
 @import url("./common/placeholderItalic.css");
 @import url("./common/header.css");
 @import url("./common/popup.css");
 @import url("./common/menu.css");
 @import url("./common/container.css");
-
 /*
-@import url("./common/dropdown.css");
 @import url("./common/combobox.css");
 @import url("common/toastMessage.css");
 @import url("common/checkbox.css");
